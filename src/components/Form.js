@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
-import { FaPlusSquare } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 import { TodoContext } from '../contexts/TodoContext';
 
 const Form = () => {
-	const { todos, setTodos, setStatus, inputText, setInputText, toastMessage } =
+	const { todos, setTodos, inputText, setInputText, toastMessage } =
 		useContext(TodoContext);
 
 	const inputTextHandler = (e) => {
@@ -17,6 +16,8 @@ const Form = () => {
 			toastMessage('Enter some text', 'error');
 			return;
 		} else if (inputText.id !== null) {
+			let todoElement = document.querySelector(`#todo-${inputText.id}`);
+			todoElement.classList.add('edited');
 			setTodos(
 				todos.map((item) => {
 					if (item.id === inputText.id) {
@@ -28,6 +29,9 @@ const Form = () => {
 					return item;
 				})
 			);
+			todoElement.addEventListener('transitionend', () => {
+				todoElement.classList.remove('edited');
+			});
 
 			toastMessage('Item Updated Successfully', 'info');
 		} else {
@@ -45,27 +49,19 @@ const Form = () => {
 		setInputText({ id: null, text: '' });
 	};
 
-	const statusHandler = (e) => {
-		setStatus(e.target.value);
-	};
 	return (
 		<form>
-			<input
-				value={inputText.text}
-				type='text'
-				className='todo-input'
-				onChange={inputTextHandler}
-				placeholder='Add Todo Task'
-			/>
-			<button className='todo-button' type='submit' onClick={submitTodoHandler}>
-				<FaPlusSquare />
-			</button>
-			<div className='select'>
-				<select name='todos' className='filter-todo' onChange={statusHandler}>
-					<option value='all'>All</option>
-					<option value='completed'>Completed</option>
-					<option value='pending'>Pending</option>
-				</select>
+			<div className='inputField'>
+				<input
+					value={inputText.text}
+					type='text'
+					onChange={inputTextHandler}
+					placeholder='Add Todo Task'
+				/>
+				<button type='submit' onClick={submitTodoHandler}>
+					<i className='fas fa-plus'></i>
+					{/* <FaPlusSquare /> */}
+				</button>
 			</div>
 		</form>
 	);

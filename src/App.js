@@ -1,22 +1,26 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import './App.css';
 import Form from './components/Form';
 import TodoList from './components/TodoList';
-import { TodoContext, TodoProvider } from './contexts/TodoContext';
+import { TodoProvider } from './contexts/TodoContext';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 	return (
-		<div>
-			<header>
-				<h1>React TODO App</h1>
-			</header>
-
-			<TodoProvider>
-				<Form />
-				<TodoList />
-			</TodoProvider>
-		</div>
+		<TodoProvider>
+			<div>
+				<div className='wrapper'>
+					<header>
+						TODO APP{' '}
+						<img src='./Public/Images/checklist.gif' alt='icon' height='30' />
+					</header>
+					<Form />
+				</div>
+				<div className='wrapper'>
+					<TodoList />
+				</div>
+			</div>
+		</TodoProvider>
 	);
 };
 

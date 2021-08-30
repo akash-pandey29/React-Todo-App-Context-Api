@@ -1,142 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+::selection {
+	color: #ffff;
+	background: rgb(142, 73, 232);
 }
 body {
-	background-image: linear-gradient(#253898, #9631c5);
-	color: white;
-	font-family: 'Poppins', sans-serif;
-	min-height: 100vh;
+	width: 100%;
+	height: 100vh;
+	padding: 10px;
+	background: linear-gradient(to bottom, #253898 0%, #9631c5 100%);
 }
-header {
-	font-size: 2rem;
+.wrapper {
+	background: #fff;
+	max-width: 400px;
+	width: 100%;
+	margin: 25px auto;
+	padding: 25px;
+	border-radius: 5px;
+	box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
 }
-
-header,
-form {
-	min-height: 20vh;
+.wrapper header {
+	font-size: 30px;
+	font-weight: 600;
+}
+.wrapper .inputField {
+	margin: 20px 0;
+	width: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	height: 45px;
 }
-form input,
-form button {
-	padding: 0.5rem;
-	font-size: 2rem;
-	border: none;
-	background: white;
-}
-form button {
-	color: #ff6f47;
-	background: #f7fffe;
-	cursor: pointer;
+.inputField input {
+	width: 85%;
+	height: 100%;
+	outline: none;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	font-size: 17px;
+	padding-left: 15px;
 	transition: all 0.3s ease;
 }
-form button:hover {
-	background: #ff6f47;
-	color: white;
+.inputField input:focus {
+	border-color: #8e49e8;
 }
-.todo-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.inputField select {
+	width: 40%;
+	height: 70%;
+	outline: none;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	font-size: 17px;
+	padding-left: 15px;
+	transition: all 0.3s ease;
+}
+.inputField select:focus {
+	border-color: #8e49e8;
+}
+.inputField button {
+	width: 50px;
+	height: 100%;
+	border: none;
+	color: #fff;
+	margin-left: 5px;
+	font-size: 21px;
+	outline: none;
+	background: #8e49e8;
+	cursor: pointer;
+	border-radius: 3px;
+	transition: all 0.3s ease;
+}
+.inputField button:hover,
+.footer button:hover {
+	background: #5141e4;
+}
+.inputField button.active {
+	opacity: 1;
+	pointer-events: auto;
 }
 
-.todo-list {
-	min-width: 30%;
+.wrapper .todoList {
+	max-height: 450px;
+	overflow-y: auto;
+}
+.todoList li {
+	position: relative;
 	list-style: none;
+	margin-bottom: 8px;
+	border-radius: 3px;
+	padding: 10px 15px;
+	cursor: default;
+	overflow: hidden;
+	word-wrap: break-word;
+}
+
+.todoList li .icon {
+	position: absolute;
+	right: -120px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: linear-gradient(to right, #5141e4 0%, #e74c3c 100%);
+	width: 120px;
+	height: 100%;
+	font-size: larger;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+	border-radius: 0 3px 3px 0;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+.todoList li:hover .icon {
+	right: 0px;
+}
+
+.todoList li .icon .icon-action {
+	margin: 0px 7px;
 }
 
 .todo {
-	margin: 0.5rem;
-	background: white;
-	font-size: 1.5rem;
-	color: black;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	background: #f2f2f2;
 	transition: all 1s ease;
 }
-.filter-todo {
-	padding: 1rem;
-}
-.todo li {
-	flex: 1;
-}
 
-.trash-btn,
-.complete-btn,
-.edit-btn {
-	background: #d65f45;
-	color: white;
+.wrapper .footer {
+	display: flex;
+	width: 100%;
+	margin-top: 20px;
+	align-items: center;
+	justify-content: space-between;
+}
+.footer button {
+	padding: 6px 10px;
+	border-radius: 3px;
 	border: none;
-	padding: 1rem;
+	outline: none;
+	color: #fff;
+	font-weight: 400;
+	font-size: 16px;
+	margin-left: 5px;
+	background: #8e49e8;
 	cursor: pointer;
-	font-size: 1rem;
-}
-.complete-btn {
-	background: rgb(11, 212, 162);
-}
-.edit-btn {
-	background: rgb(255, 189, 6);
-}
-.todo-item {
-	padding: 0rem 0.5rem;
-}
-
-.fa-trash,
-.fa-check {
-	pointer-events: none;
 }
 
 .fall {
+	background: #9631c5;
 	transform: translateY(10rem) rotateZ(20deg);
 	opacity: 0;
 }
 
 .completed {
 	text-decoration: line-through;
+	background: #62f162;
 	opacity: 0.5;
 }
 
-/*CUSTOM SELECTOR */
-select {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	-ms-appearance: none;
-	appearance: none;
-	outline: 0;
-	box-shadow: none;
-	border: 0 !important;
-	background-image: none;
-}
-
-/* Custom Select */
-.select {
-	margin: 1rem;
-	position: relative;
-	overflow: hidden;
-}
-select {
-	color: #ff6f47;
-	font-family: 'Poppins', sans-serif;
-	cursor: pointer;
-	width: 12rem;
-}
-/* Arrow */
-.select::after {
-	content: '\25BC';
-	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 1rem;
-	background: #ff6f47;
-	cursor: pointer;
-	pointer-events: none;
-}
-/* Transition */
-
-.select:hover::after {
-	transform: scale(1.5);
+.edited {
+	background: #5141e4;
+	color: #fff;
 }

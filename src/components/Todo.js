@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
-import { FaCheck, FaTrash, FaPen } from 'react-icons/fa';
 import { TodoContext } from '../contexts/TodoContext';
 
-const Todo = ({ todo, todoIndex }) => {
+const Todo = ({ todo }) => {
 	const { todos, setTodos, setInputText, toastMessage } =
 		useContext(TodoContext);
 
 	const deleteHandler = () => {
-		let todoElement = document.querySelector(`#todo-${todoIndex}`);
+		let todoElement = document.querySelector(`#todo-${todo.id}`);
 		todoElement.classList.add('fall');
 		todoElement.addEventListener('transitionend', () => {
 			setTodos(todos.filter((item) => item.id !== todo.id));
@@ -33,19 +32,21 @@ const Todo = ({ todo, todoIndex }) => {
 		);
 	};
 	return (
-		<div className='todo' id={`todo-${todoIndex}`}>
+		<div className='todo' id={`todo-${todo.id}`}>
 			<li className={`todo-item ${todo.completed ? 'completed' : ''}`}>
 				{todo.text}
+				<span className='icon'>
+					<span className='icon-action' onClick={completeHandler}>
+						<i className='fas fa-check-double'></i>
+					</span>
+					<span className='icon-action' onClick={editHandler}>
+						<i className='fas fa-pen'></i>
+					</span>
+					<span className='icon-action' onClick={deleteHandler}>
+						<i className='fas fa-trash'></i>
+					</span>
+				</span>
 			</li>
-			<button className='complete-btn' onClick={completeHandler}>
-				<FaCheck />
-			</button>
-			<button className='edit-btn' onClick={editHandler}>
-				<FaPen />
-			</button>
-			<button className='trash-btn' onClick={deleteHandler}>
-				<FaTrash />
-			</button>
 		</div>
 	);
 };

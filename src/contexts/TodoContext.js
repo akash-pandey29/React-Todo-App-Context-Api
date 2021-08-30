@@ -53,9 +53,9 @@ export const TodoProvider = (props) => {
 	////Code for Toast Messages
 	toast.configure();
 	const toastProperties = {
-		position: 'top-center',
-		autoClose: 5000,
-		hideProgressBar: false,
+		position: 'bottom-center',
+		autoClose: 1500,
+		hideProgressBar: true,
 		closeOnClick: true,
 		pauseOnHover: true,
 		draggable: true,
