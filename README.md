@@ -1,4 +1,4 @@
-# Basic TODO App using React
+# Basic TODO App using React and Context API
 
 ## Introduction
 
